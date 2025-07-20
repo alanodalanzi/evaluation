@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>User Page</title>
+    </head>
+    <bady dir="rtl"
+<p> 
+  <h1>تقييم |evaluation</h1><hr>
+<h2> رايك بالخدمه</h2>
+
+<form onsubmit="return checkNotes()">
+
+ <h3 style="text-align: ;"
+
+<from>
+
+    <input type="radio" id="excellent" name="service" value="ممتازة">
+    <label for="excellent">😃 ممتازة</label>
+
+    <input type="radio" id="good" name="service" value="جيدة">
+    <label for="good">🙂 جيدة</label>
+
+    <input type="radio" id="neutral" name="service"value="محايد">
+    <label for="neutral">😐 محايد</label>
+
+    <input type="radio" id="bad" name="service"value="سيئة">
+    <label for="bad">😠 سيئة</label>
+
+    <input type="radio" id="verybad" name="service"value="جدا سيئة">
+    <label for="verybad">😡 سيئةجدا</label><br><br>
+
+    <label for="notes">الملاحظات :</label><br>
+    <textarea id="notes" name="notes" rows="5" cols="30" placeholder="ملاحظاتك هنا ..."></textarea><br><br>
+    <input type="submit"  value="ارسال التقييم"><br>
+
+</from>
+<script>
+    function checkNotes() {
+      var bad =document.getElementById("bad").checked;
+      var verybad =document.getElementById("verybad").checked;
+      var notes =document.getElementById("notes").value.trim();
+
+      if ((bad || verybad) && notes===" ") {
+        alert("يرجى كتابة ملاحظة عند اختيار تقييم سيئ")
+        return false; // يمنع الألرسال
+      }
+      return true; // يسمح بالأرسال
+    }
+    </script>
+
+    </body>
+</html>

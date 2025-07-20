@@ -1,0 +1,113 @@
+<html lang="ar" dir="rtl">
+<head
+<title>نتائج التقييم</title>
+<style>
+body{ 
+font-family: Arial, sans-serif;
+background-color: #f8f8f8;
+text-align: center;}
+.container{
+width: 800px;
+margin: 50px auto;
+padding: 20px;
+background-color: #fff;
+border: 2px solid #000;
+border-radius: 10px;}
+.total{
+ font-size: 20px;
+ margin-bottom: 20px;}
+.pie-chart{
+width: 220px;
+height: 220px;
+border-radius: 50%;
+margin: 20px auto;
+background: conic-gradint(#ccc 0% 100%);}
+.legend{
+display:flex;
+justify-content: center;
+flex-wrap: wrap;
+gap: 15px;
+margin-bottom: 20px;}
+.legend-item{
+display: flex;
+align-items: center;
+gap: 5px;}
+.buttons{
+margin: 20px 0;}
+button{
+padding: 10px 20px;
+margin: 5px;
+font-size: 16px;
+cursor: pointer;
+}
+</style>
+</html>
+</head>
+<body>
+<div class="container">
+<h2>نتائج التقييم</h2>
+<div class= "total">المجموع:<span id="total">0</span></div>
+<div class="pie-chart"id="pie-chart"></div>
+<div class="legend">
+ <div class="legend-item"><div class="legend-color"style="background-color:green;"></div>ممتاز<div><br><br>
+ <div class="legend-item"><div class="legend-color"style="background-color:yellow;"></div>جيد</div><br><br>
+ <div class="legend-item"><div class="legend-color"style="background-color:gray;"></div>محايد</div><br><br>
+ <div class="legend-item"><div class="legend-color"style="background-color:orange;"></div>سيئه</div><br><br>
+ <div class="legend-item"><div class="legend-color"style="background-color:red;"></div>سيئه جدا</div><br><br>
+ </div>
+ <div class="buttons">
+    <button onclick="vote('excellent')">ممتاز</button><br><br>
+    <button onclick="vote('good')">جيد</button><br><br>
+    <button onclick="vote('neutral')">محايد</button><br><br>
+    <button onclick="vote('bad')">سيئه</button><br><br>
+    <button onclick="vote('very bad')">سيئه جدا</button><br><br>
+ </div>
+ <script>
+    let counts ={
+        excellent: 0,
+        good: 0,
+        neutral: 0,
+        bad:0,
+        verybad: 0
+};
+function vote(type) {
+     counts[type]++;
+     updatechart();
+     }
+     function updatechart() {
+        const total = Object.values(counts) .reduce((a, b) => a + b, 0);
+        document.getElementById('total'). innerText =total;
+        if (total === 0) {
+            document .getElementById('chart') .style.background ="conic-gradient(#ccc 0% 100%)";return; }
+const percentages = {
+    excellent: (counts.excellent / total) * 100,
+    good: (counts.good / total) *100,
+    neutral:(counts.neutral / total) * 100,
+    bad: (counts.bad / total) *100,
+    verybad: (counts.verybad / total) * 100
+};
+const degrees ={
+    excellent: percentages.excellent * 3.6,
+    good: percentages.good * 3.6,
+    neutral: percentages.neutral * 3.6,
+    bad: percentages.bad* 3.6,
+    verybad: percentages.verybad * 3.6};
+    let deg1 = degrees.excellent;
+    let deg2 = deg1 + degrees.good;
+    let deg3 = deg2 + degrees.neutral;
+    let deg4 = deg3 + degrees.bad;
+    let deg5 =360;
+document.getElementById(`chart`).style.background =`conic-gradient(
+     green 0deg ${deg1}deg,
+     yellow ${deg1}deg ${deg2} deg,
+     gray ${deg2} deg ${deg3}deg,
+     orange ${deg3}deg ${deg4}deg,
+     red ${deg4}deg ${deg5}deg
+)`
+};
+     
+    
+    </script>
+
+</body>
+</html>
